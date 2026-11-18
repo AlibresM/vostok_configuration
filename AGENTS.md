@@ -18,6 +18,8 @@ printer.cfg                  # Пользовательский файл. Ред
 printer_base.cfg             # !!! НЕ РЕДАКТИРОВАТЬ. База: carriages, steppers, extruders, homing, IDEX-макросы.
 electronics_*.cfg            # Официально поддерживаемые модули распиновки под конкретную плату + коммутационные платы.
 chamber_heater.cfg           # Опциональный модуль нагревателя активной термокамеры (на основе Smart Chamber Heater, MIT).
+iheater_2x.cfg               # Опциональный модуль: два нагревателя камеры iHeater, каждый со своим USB-MCU (на основе 2XiHeater.cfg, GPLv3).
+                             # Подключается вместо chamber_heater.cfg: оба определяют M141, M191 и TURN_OFF_HEATERS.
 postprocessing/
   fast_tool_swaps.py         # Слайсер-постпроцессор быстрой смены инструмента (dmbutyugin, GPLv3).
   fix_toolchange.py          # Чистит G-code: убирает G1 E* при T-переключениях, склеивает дубли, добавляет deretract.
@@ -122,7 +124,7 @@ user_configs/                # Пользовательские конфигур
 
 - **Кодировка и язык**: комментарии — на русском, UTF-8.
 - **Язык документации**: каждый пользовательский README существует в двух версиях — `README.md` (русский) и `README.en.md` (английский). Правки в одной переносятся на вторую в том же коммите, иначе версии разъедутся.
-- **Лицензия**: CC-BY 4.0 для `*.cfg`, шапка указана в каждом cfg. Исключение — `chamber_heater.cfg` (MIT, см. его шапку). Скрипты в `postprocessing/` — GPLv3.
+- **Лицензия**: CC-BY 4.0 для `*.cfg`, шапка указана в каждом cfg. Исключения — `chamber_heater.cfg` (MIT) и `iheater_2x.cfg` (GPLv3), см. их шапки. Скрипты в `postprocessing/` — GPLv3.
 - **Macro-именование**: пользовательские макросы — `UPPER_SNAKE_CASE` (`IDEX_RESET`, `T0`, `IDEX_MODE_COPY`). Служебные (с подчёркиванием) — `_IDEX_SETTINGS`, `_IDEX_VARIABLES`, `_HOME_Z`, `_PARK_PREPARE`, `_PARK_RESTORE_EXTRUDERS`.
 - **Параметры Klipper**: `snake_case`.
 - **Порядок секций в `printer_base.cfg`**: printer → carriages → steppers → extruders → bed/probe → homing → fans → macros. При добавлении секции держитесь этой структуры.
