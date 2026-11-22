@@ -42,7 +42,8 @@ user_configs/                # Пользовательские конфигур
    - `[homing_override]` с G28-логикой, использующей `_IDEX_SETTINGS` и `_HOME_Z`;
    - макросы IDEX: `IDEX_RESET`, `IDEX_MODE_FULL_CONTROL`, `IDEX_MODE_COPY`, `IDEX_MODE_MIRROR`, `T0`, `T1`, `PARK_X`, `PARK_W`, `PARK_XW`, `SET_W_OFFSETS`, `CALC_OFFSET`;
    - макросы печати: `PRINT_END`, `CANCEL_PRINT`, `PAUSE`, `RESUME`, `M600`, `M601`;
-   - калибровка: `IDEX_SHAPER_CALIBRATE`, `ENABLE_EQUAL_PA`, `DISABLE_EQUAL_PA`, обёртка `SET_PRESSURE_ADVANCE`;
+   - калибровка: `IDEX_SHAPER_CALIBRATE`, `ENABLE_EQUAL_PA`, `DISABLE_EQUAL_PA`, обёртка `SET_PRESSURE_ADVANCE`, `SHOW_PROBE_OFFSET`;
+   - филамент: `LOAD_FILAMENT`, `UNLOAD_FILAMENT`, служебный `_TIP_FORMING`;
    - передача данных из слайсера (сейчас не используются ни конфигом, ни стартовым G-кодом): `SET_PA_VALUES`, `APPLY_PA_VALUES`, `SET_NEXT_PRINT_MODE`, `RESET_VARIABLES`.
 2. **`electronics_*.cfg`** — только распиновка (`step_pin`, `dir_pin`, `enable_pin`, `endstop_pin`, `heater_pin`, `sensor_pin`, `pin` вентиляторов), настройки драйверов (`run_current`, `[tmcXXXX ...]`), акселерометры и `[resonance_tester]`.
 3. **`printer.cfg`** — калибруемые пользователем параметры: `position_min/max/endstop`, `max_velocity`, `rotation_distance`, `pid_*`, `z_offset`, `bed_mesh`, `screws_tilt_adjust`, `_IDEX_SETTINGS`, `[mcu ...]` с CAN-uuid, `[include ...]` нужного `electronics_*.cfg`.
@@ -96,6 +97,8 @@ user_configs/                # Пользовательские конфигур
 | `CALC_OFFSET XL= XR= YF= YB=` | Расчёт смещений правой головы по калибровочной модели (только выводит значения). |
 | `IDEX_SHAPER_CALIBRATE [TEST_W=1] [TEST_Y=0]` | Калибровка input shaper для X или W и для Y, акселерометром тестируемой головы. |
 | `ENABLE_EQUAL_PA` / `DISABLE_EQUAL_PA` | Одинаковый Pressure Advance для обеих голов (для калибровки PA в зеркальном/дублирующем режиме). |
+| `LOAD_FILAMENT` / `UNLOAD_FILAMENT` | Загрузка / выгрузка 50 мм филамента в активный экструдер (выгрузка — с формированием кончика `_TIP_FORMING`). Хотэнд должен быть нагрет. |
+| `SHOW_PROBE_OFFSET` | Показать `z_offset` датчика автоуровня из конфигурации. |
 
 Ключевые переменные в `_IDEX_SETTINGS` (`printer.cfg`, раздел «Настройки принтера»):
 - `default_printhead_distance` — расстояние между головами в режиме копирования;
