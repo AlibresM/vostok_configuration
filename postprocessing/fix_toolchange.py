@@ -168,7 +168,9 @@ def process_gcode(file_path, long_deretract_length):
     
     try:
         # Read all lines
-        with open(path, 'r') as f:
+        # The slicer writes G-code as UTF-8. Without an explicit encoding, Windows uses the system code page
+        # (e.g. cp1251), which can't decode some UTF-8 bytes (Cyrillic "И" contains 0x98) and fails.
+        with open(path, 'r', encoding='utf-8') as f:
             lines = f.readlines()
         
         # Find all segments
@@ -245,7 +247,7 @@ def process_gcode(file_path, long_deretract_length):
             current_line += 1
         
         # Write back to file
-        with open(path, 'w') as f:
+        with open(path, 'w', encoding='utf-8') as f:
             f.writelines(new_lines)
         
         print(f"File processed successfully: {file_path}")
